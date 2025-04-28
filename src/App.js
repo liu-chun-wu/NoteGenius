@@ -2,7 +2,7 @@ import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import LoginPage from './pages/LoginPage';
 import CategoryPage from './pages/CategoryPage';
-import './App.css';
+import EditPage from './pages/EditPage';
 
 function App() {
   return (
@@ -10,6 +10,7 @@ function App() {
       <Routes>
         <Route path="/" element={<LoginPage />} />
         <Route path="/category" element={<CategoryPage />} />
+        <Route path="/edit/:noteId" element={<EditPage />} />
       </Routes>
     </Router>
   );
