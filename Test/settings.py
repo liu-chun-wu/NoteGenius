@@ -12,6 +12,10 @@ https://docs.djangoproject.com/en/5.1/ref/settings/
 
 from pathlib import Path
 
+import os
+from dotenv import load_dotenv
+load_dotenv()
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -77,11 +81,11 @@ WSGI_APPLICATION = 'Test.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'myproject_db',  # 剛剛創建的資料庫名稱
-        'USER': 'root',  # 你的 MySQL 使用者名稱
-        'PASSWORD': 'jay920917',  # 你的 MySQL 密碼
-        'HOST': 'localhost',  # 如果 MySQL 在本機，保持為 localhost
-        'PORT': '3306',  # MySQL 預設端口
+        'NAME': os.getenv("MYSQL_DATABASE", "WWeb_Programming_final_project"),
+        'USER': os.getenv("MYSQL_USER", "root"),
+        'PASSWORD': os.getenv("MYSQL_PASSWORD", ""),
+        'HOST': os.getenv("MYSQL_HOST", "localhost"),
+        'PORT': os.getenv("MYSQL_PORT", "3306"),
     }
 }
 
