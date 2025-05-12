@@ -1,4 +1,5 @@
-
+from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth.models import User
 
 _MODEL = None
 
@@ -74,3 +75,20 @@ def summarize_text(text: str) -> str:
 
 def rewrite_text(text: str) -> str:
     return ask_gemini(f"請將下列內容改寫成更專業、簡潔的語氣：\n{text}")
+
+#登入登出註冊
+def handle_login(request, username, password):
+    user = authenticate(username=username, password=password)
+    if user:
+        login(request, user)
+        return True, user
+    return False, None
+
+def handle_logout(request):
+    logout(request)
+
+def handle_register(username, password):
+    if User.objects.filter(username=username).exists():
+        return False, "使用者已存在"
+    User.objects.create_user(username=username, password=password)
+    return True, "註冊成功"
